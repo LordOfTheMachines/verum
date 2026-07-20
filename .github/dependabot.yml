@@ -9,20 +9,12 @@ updates:
     labels:
       - "area:build"
 
-  # uv lockfiles are supported through the pip ecosystem, which reads
-  # pyproject.toml and uv.lock.
-  - package-ecosystem: pip
-    directory: /
-    schedule:
-      interval: weekly
-    commit-message:
-      prefix: "chore"
-    labels:
-      - "area:build"
-    groups:
-      dev-dependencies:
-        patterns:
-          - "*"
-        update-types:
-          - minor
-          - patch
+# NOTE: the `pip` ecosystem is deliberately absent. Dependabot bumps the
+# constraints in pyproject.toml but does not regenerate uv.lock, and CI syncs
+# with `uv sync --locked` — so every such PR would fail until someone re-locked
+# by hand. Python dependencies are refreshed manually instead:
+#
+#     uv lock --upgrade && uv sync && uv run pytest
+#
+# Revisit once Phase 1 adds real runtime dependencies (PyQt6, PyMuPDF), where
+# security updates matter more than they do for a dev-tool-only dependency set.
