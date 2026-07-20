@@ -1,6 +1,5 @@
 [project]
 name = "verum"
-version = "0.0.1"
 description = "A lightweight universal document viewer (PDF, images, text, office formats)"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -17,26 +16,41 @@ classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Multimedia :: Graphics :: Viewers",
     "Topic :: Office/Business",
 ]
 dependencies = []
+dynamic = ["version"]
 
-[project.optional-dependencies]
+[project.urls]
+Homepage = "https://github.com/LordOfTheMachines/verum"
+Repository = "https://github.com/LordOfTheMachines/verum"
+Issues = "https://github.com/LordOfTheMachines/verum/issues"
+
+# NOTE: `[project.scripts] verum = "verum.app:main"` lands with Phase 1, once
+# `verum/app.py` exists. Declaring it earlier ships a console script that
+# crashes on launch.
+
+# NOTE: `pytest-qt` joins this group in Phase 1, together with PyQt6. Installed
+# without a Qt binding it aborts collection for the whole suite.
+[dependency-groups]
 dev = [
     "pytest>=8.0",
-    "pytest-qt>=4.4",
     "pytest-cov>=5.0",
     "ruff>=0.6",
     "mypy>=1.11",
 ]
 
-[project.scripts]
-verum = "verum.app:main"
-
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/verum/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/verum"]
 
 [tool.ruff]
 line-length = 100
@@ -48,7 +62,21 @@ select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
 [tool.mypy]
 python_version = "3.12"
 strict = true
+files = ["src", "tests"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+addopts = "-ra --strict-markers --strict-config"
+
+[tool.coverage.run]
+source = ["src/verum"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
