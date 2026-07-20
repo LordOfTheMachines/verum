@@ -4,6 +4,11 @@ Verum is in early development — Phase 0 (setup) is done, Phase 1 (a working PD
 viewer) has not started. The most useful contributions right now are Phase 1
 tasks from [ROADMAP.md](ROADMAP.md).
 
+Questions and half-formed ideas belong in
+[Discussions](https://github.com/LordOfTheMachines/verum/discussions); issues are
+for concrete bugs and scoped work. Participation is governed by our
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Development setup
 
 Requires Python 3.12+ and [uv](https://docs.astral.sh/uv/).
