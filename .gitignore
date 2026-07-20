@@ -51,6 +51,10 @@ coverage.xml
 .DS_Store
 Thumbs.db
 
+# Packaging (Phase 7+)
+*.spec
+!*.py.spec
+
 # Project specific
 *.log
 output/
