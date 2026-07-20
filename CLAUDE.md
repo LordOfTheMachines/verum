@@ -25,6 +25,18 @@ uv run pytest tests/unit/test_package.py::test_version_is_exposed  # single test
 All four checks must pass before committing — CI runs the same set on Linux and
 Windows across Python 3.12 and 3.13.
 
+Two CI facts that are easy to trip over:
+
+- **CI syncs with `uv sync --locked`.** Any change to a dependency constraint in
+  `pyproject.toml` must ship with a regenerated `uv.lock` in the same commit, or
+  CI fails. This is deliberate: the earlier `--frozen` silently installed
+  whatever the lockfile pinned, so dependency bumps went green while testing the
+  *old* versions.
+- **The five CI job names are required status checks** on the `main` ruleset
+  (`lint & types (ubuntu-latest)` and the four `tests (pyX.YY, os)` jobs).
+  Renaming a job or changing the matrix orphans the required check and PRs will
+  wait forever — update the ruleset in the same change.
+
 ## Architecture rules
 
 Layering is `ui → core → backends`, and the dependency arrow points down only.

@@ -31,6 +31,10 @@ uv run mypy
 uv run pytest --cov
 ```
 
+CI syncs with `uv sync --locked`, so if you change a dependency constraint in
+`pyproject.toml` you must run `uv lock` and commit the updated `uv.lock` in the
+same change.
+
 ## Ground rules
 
 - **Layering:** `ui → core → backends`, downward only. `core` and `backends`
