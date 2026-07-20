@@ -36,7 +36,7 @@ Issues = "https://github.com/LordOfTheMachines/verum/issues"
 # without a Qt binding it aborts collection for the whole suite.
 [dependency-groups]
 dev = [
-    "pytest>=8.0",
+    "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
     "ruff>=0.15.22",
     "mypy>=2.3.0",
