@@ -1,0 +1,45 @@
+name: Feature request
+description: Suggest a capability for Verum
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check `ROADMAP.md` first — the feature may already be scheduled for a
+        later phase.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can't you do today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Which roadmap phase does this belong to?
+      options:
+        - "Phase 1 — PDF viewing (MVP)"
+        - "Phase 2 — Reading experience"
+        - "Phase 3 — PDF editing"
+        - "Phase 4 — Image formats"
+        - "Phase 5 — Document formats"
+        - "Phase 6 — OCR"
+        - "Phase 7+ — Hardening & packaging"
+        - "Not on the roadmap"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
